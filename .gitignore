@@ -1,0 +1,8 @@
+backups/
+data/
+deeplake_db/
+deeplake_db2/
+deeplake_db3/
+experiments/
+.env
+.docker-compose.yml

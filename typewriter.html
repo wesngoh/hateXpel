@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typewriter Effect</title>
+    <style>
+        #type-output {
+            color: white; 
+            font-family: "Courier New", Courier, monospace; /* This gives a classic typewriter appearance */
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        function typeWriter(elementId, text, speed) {
+            let index = 0;
+            let targetElement = document.getElementById(elementId);
+            function typeChar() {
+                if (index < text.length) {
+                    targetElement.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(typeChar, Math.random() * (speed + 50 - speed) + speed);
+                }
+            }
+            typeChar();
+        }
+    </script>
+</head>
+
+<body>
+    <div id="type-output"></div>
+    <script>
+        let textToType = "{{ text_to_type }}";
+        let speed = 10; // adjust this for typing speed
+        typeWriter("type-output", textToType, speed);
+    </script>
+</body>
+
+</html>
