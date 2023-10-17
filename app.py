@@ -1,16 +1,18 @@
 # Bring in deps
 import os
-import json
+# import json
 from dotenv import load_dotenv
 import time
+import re
+import inflect
+import random
 
 import openai
 import streamlit as st 
-from st_pages import Page, show_pages, add_page_title
+from st_pages import Page, show_pages 
+from annotated_text import annotated_text
 
 from langchain.llms import AzureOpenAI
-from langchain.chains import LLMChain
-from langchain.chains import RetrievalQA, ConversationalRetrievalChain
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -20,7 +22,7 @@ import weaviate
 from weaviate import Client
 
 
-# load_dotenv()
+load_dotenv()
 # configure Azure OpenAI Service API
 openai.api_type = os.getenv("OPENAI_API_TYPE")
 openai.api_version = os.getenv("OPENAI_API_VERSION")
@@ -34,9 +36,10 @@ st.title(':speaking_head_in_silhouette: :no_entry_sign:  :man-gesturing-no: Hate
 # Specify what pages should be shown in the sidebar
 show_pages(
     [
-        Page("app.py", "Home", "🏠"),
-        Page("about.py", "About", ":books:"),
-        Page("credits.py", "Credits", ":coin:")
+        Page("app.py", "home", "🏠"),
+        Page("about.py", "what's this?", ":books:"),
+        Page("examples.py", "a little help?", ":people_hugging:"),
+        Page("credits.py", "paying dues", ":coin:")
     ]
 )
 
@@ -45,7 +48,7 @@ def typing(text):
         html_content = f.read()
         html_content = html_content.replace("{{ text_to_type }}", text)
         st.components.v1.html(html_content, height=25, scrolling=False)
-    time.sleep(1)
+    time.sleep(0.6)
 
 def get_vector_embedding(text):
     st.divider()
@@ -94,8 +97,8 @@ def generate_response(db, input_text):
     Section 298 of the Penal Code is a charge for uttering words, etc., with deliberate intent to wound the religious or racial feelings of any person.
     Section 298A of the Penal Code is a charge for promoting enmity between different groups on grounds of religion or race or doing acts prejudicial to maintenance of harmony.
     Hate speech has been defined as all forms of expression which spread, incite, promote, or justify racial hatred, xenophobia, or other forms of hatred based on intolerance.
-    Your instruction is to first evaluate and provide explanation if the comment at the end is considered a hate speech or not.
-    Secondly, identify the possible core identity groups and the sub identity groups.
+    Your instruction is to first evaluate and provide explanation if the given comment is considered a hate speech or not. If it is not a hate speech, explain why it is not a hate speech.
+    Secondly, identify the possible core identity groups and the sub identity groups from the comment.
     Use only the context given below to carry out the task. If you don't know the answer, just say you don't know the answer.
 
     Here is the context:
@@ -127,6 +130,7 @@ def generate_response(db, input_text):
         st.code(f"{i+1}. { v.page_content }")
     
     output = qa_chain({"input_documents": docs, "comment": input_text}, return_only_outputs=True)
+
     typing("running few-shot prompts ....")
     typing("fetching results ....")
     st.divider()
@@ -136,6 +140,8 @@ def generate_response(db, input_text):
 def clear_form():
     st.session_state["text"] = ""
 
+
+
 ##### FORM UI #####
 text = st.text_area(
     label="Check your comment here:",
@@ -144,11 +150,9 @@ text = st.text_area(
     key="text"
     )
 
-inter_cols_pace, col1, col2 = st.columns((12, 2, 2))
-with col1:
-    cleared = st.button(label="Clear", on_click=clear_form)
-with col2:
-    submitted = st.button("Submit")
+# col1, col2 = st.columns((15, 1))
+# with col2:
+submitted = st.button("Submit")
 
 
 
@@ -158,9 +162,36 @@ with st.sidebar:
     st.write("Ngoh Wei Jie")
     st.write("Data Scientist, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group")
 
+def colour_write(output):
+    anno_list = ['core identity', 'sub identity',
+                 'race', 'ethnicity', 'black', 'african american', 'latino', 'non-white', 'hispanic', 'asian', 
+                 'middle eastern', 'native american', 'alaska native', 'pacific islander', 'non-hispanic white',
+                 'religion', 'jews', 'christians', 'buddhists', 'hindus','mormons', 'atheists', 'muslims', 'national origin', 
+                 'citizenship', 'specific country', 'immigrant', 'migrant worker', 'undocumented person', 'gender',
+                 'women', 'men', 'non-binary', 'third gender', 'transgender women', 'transgender men', 'transgender', 'sexual orientation', 
+                 'bisexual', 'gay', 'lesbian', 'heterosexual', 'age', 'children', 'adolescents/teenagers', 'young adults/adults', 
+                 'middle-aged', 'seniors', 'disability', 'disabilities', 'cognitive disorders', 'autism', 'down syndrome', 'mental health', 'depression',
+                 'visually impaired', 'hearing impaired', 'chinese', 'malay', 'muslim', 'indian', 'nationality', 'country', 'Singapore', 'sexuality']
+    
+    colors = ['red', 'blue', 'green', 'violet', 'orange']
+
+    p = inflect.engine()
+    plural_forms = [p.plural(word) for word in anno_list]
+    anno_list = anno_list + plural_forms
+
+    for term in anno_list:
+        # Escape any special characters in the term for regex matching
+        escaped_term = re.escape(term)
+        # Randomly select a color
+        color = random.choice(colors)
+        # Use a case-insensitive regex search and replace
+        output = re.sub(r'(?i)\b' + escaped_term + r'\b', f"**:{color}[{term}]**", output)
+
+    st.markdown(output)
 
 ##### MAIN CALL #####
 if submitted:
     st.code(get_vector_embedding(text))
     db = start_vectorstore()
-    st.write(generate_response(db, text))
+    output = generate_response(db, text)
+    colour_write(output)

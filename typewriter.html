@@ -20,7 +20,8 @@
                 if (index < text.length) {
                     targetElement.innerHTML += text.charAt(index);
                     index++;
-                    setTimeout(typeChar, Math.random() * (speed + 50 - speed) + speed);
+                    // setTimeout(typeChar, Math.random() * (speed + 50 - speed) + speed);
+                    setTimeout(typeChar, Math.random() * speed);
                 }
             }
             typeChar();
@@ -32,7 +33,7 @@
     <div id="type-output"></div>
     <script>
         let textToType = "{{ text_to_type }}";
-        let speed = 10; // adjust this for typing speed
+        let speed = 30; // adjust this for typing speed
         typeWriter("type-output", textToType, speed);
     </script>
 </body>
