@@ -1,5 +1,6 @@
 import streamlit as st
 
+st.set_page_config(page_title='a little help?', page_icon=':no_entry_sign:')
 st.title(':clipboard: examples')
 
 st.write("Try out the hate speech classifier using the examples below!")
@@ -13,3 +14,12 @@ st.write('**Non-Hate Speech Examples:**')
 st.code("It's heartwarming to see Singaporeans coming together to support the LGBTQ+ community. Love is love and everyone deserves to be happy. #pride #singaporelove")
 st.code("It's time for Singapore to have a female Prime Minister. We have capable and qualified women leaders who can lead our country to greater heights. #genderrepresentation #womeninpower")
 st.code("Why do we still have gender pay gap in Singapore? It's time for equal pay for equal work. ")
+
+##### SIDE BAR #####
+with st.sidebar:
+    st.subheader(":computer: More about the developer:")
+    st.write("Ngoh Wei Jie")
+    st.write("*Data Scientist, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")
+    st.subheader(":computer: Technical Supervisor:")
+    st.write("Aloysius Tan")
+    st.write("*Head, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")

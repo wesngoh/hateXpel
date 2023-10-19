@@ -33,6 +33,8 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 st.set_page_config(page_title='HateXpel', page_icon=':no_entry_sign:')
 st.title(':speaking_head_in_silhouette: :no_entry_sign:  :man-gesturing-no: HateXpel ')
 
+st.write(':warning: **Trigger Warning:** Demonstration contains offensive language, profanities and other potentially distressing content. :warning:')
+
 # Specify what pages should be shown in the sidebar
 show_pages(
     [
@@ -153,17 +155,20 @@ text = st.text_area(
 # col1, col2 = st.columns((15, 1))
 # with col2:
 submitted = st.button("Submit")
-
+cleared = st.button(label="Clear", on_click=clear_form)
 
 
 ##### SIDE BAR #####
 with st.sidebar:
     st.subheader(":computer: More about the developer:")
     st.write("Ngoh Wei Jie")
-    st.write("Data Scientist, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group")
+    st.write("*Data Scientist, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")
+    st.subheader(":computer: Technical Supervisor:")
+    st.write("Aloysius Tan")
+    st.write("*Head, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")
 
 def colour_write(output):
-    anno_list = ['core identity', 'sub identity',
+    anno_list = ['core identity', 'sub identity', 'hate speech', 'not',
                  'race', 'ethnicity', 'black', 'african american', 'latino', 'non-white', 'hispanic', 'asian', 
                  'middle eastern', 'native american', 'alaska native', 'pacific islander', 'non-hispanic white',
                  'religion', 'jews', 'christians', 'buddhists', 'hindus','mormons', 'atheists', 'muslims', 'national origin', 
@@ -173,7 +178,7 @@ def colour_write(output):
                  'middle-aged', 'seniors', 'disability', 'disabilities', 'cognitive disorders', 'autism', 'down syndrome', 'mental health', 'depression',
                  'visually impaired', 'hearing impaired', 'chinese', 'malay', 'muslim', 'indian', 'nationality', 'country', 'Singapore', 'sexuality']
     
-    colors = ['red', 'blue', 'green', 'violet', 'orange']
+    colors = ['blue', 'green', 'violet', 'orange']
 
     p = inflect.engine()
     plural_forms = [p.plural(word) for word in anno_list]
@@ -182,10 +187,15 @@ def colour_write(output):
     for term in anno_list:
         # Escape any special characters in the term for regex matching
         escaped_term = re.escape(term)
-        # Randomly select a color
-        color = random.choice(colors)
-        # Use a case-insensitive regex search and replace
-        output = re.sub(r'(?i)\b' + escaped_term + r'\b', f"**:{color}[{term}]**", output)
+        # for cases where it talks about hate or non hate
+        anno_list_special = ['not', 'hate speech', 'non hate speech', 'non hate', 'hate comment']
+        if term in anno_list_special:
+            output = re.sub(r'(?i)\b' + escaped_term + r'\b', f"***:red[{term}]***", output)
+        else:
+            # Randomly select a color
+            color = random.choice(colors)
+            # Use a case-insensitive regex search and replace
+            output = re.sub(r'(?i)\b' + escaped_term + r'\b', f"**:{color}[{term}]**", output)
 
     st.markdown(output)
 

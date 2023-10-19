@@ -3,12 +3,20 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 
+st.set_page_config(page_title='what\'s this?', page_icon=':no_entry_sign:')
 st.title(':books: about HateXpel')
 
 st.subheader("Problem")
-st.write("As the world witnesses an unprecedented surge in social media, an unintended consequence has been the proliferation of hate comments online. This digital venom is especially detrimental in contexts like Singapore, where multiracialism is deeply ingrained in the societal fabric. The harmony and unity fostered over the years in this diverse nation are at risk when such hateful sentiments spread unchecked.")
+st.markdown("""
+- As the world witnesses a surge in social media, an unintended consequence has been the proliferation of hate comments online.
+- Despite so, this rising concern is often left as a second thought.
+- Many police reports have been lodged by victims who were harassed either online or in public for their identities.
+- Director RSD from MHQ have concerns over PID resources to classify these reports:
+1.  Laborious process
+2. Difficulty in understanding the nuances inherent in language context
+""")
         #  Therefore, the pressing need arises for tools like a hate speech classifier, aimed at mitigating the spread and impact of these malignant comments to preserve the delicate balance of Singapore's multicultural society.")
-st.write("Social media platforms grapple with the regulation of hate speech due to the vast volume of content, the nuances of linguistic context, and the fine line between freedom of expression and harmful intent.")
+# st.write("Social media platforms grapple with the regulation of hate speech due to the vast volume of content, the nuances of linguistic context, and the fine line between freedom of expression and harmful intent.")
 
 st.subheader("Our Community")
 st.write("The Ministry of Home Affairs (MHA) takes a strong stance against threats to Singapore’s race and religious harmony. Legislation, such as the Maintenance of Religious Harmony Act, introduce powers that would allow pre-emptive action to be taken to maintain religious harmony in Singapore.")
@@ -21,30 +29,22 @@ st.markdown(
 )
 
 st.subheader("HateXpel")
-image_rag = Image.open('data/images/rag.webp')
+image_rag = Image.open('data/images/rag_y.webp')
 st.image(image_rag, caption="HateXpel's Flowchart")
 st.markdown("""
 1. **Query Embedding**: Transforms the user's query into a high-dimensional vector through an embedding model.
 2. **Vector Database**: Consists of pre-encoded representations of knowledge and captures the context relevance of each document, serving as a rapid lookup mechanism for search queries.
 3. **Retriver**: Employs cosine similarity to extract pertinent embeddings from the vector database and their mapped documents based off the input query.
 4. **Few-Shot Prompting**: Utilizes a curated set of examples to prime the Large Language Model, guiding its capability to produce contextually rich outputs.
-5. **Generate Response**: The final step where the Large Language Model, aided by the retrieved embeddings from the vector database, synthesizes a comprehensive and technically sound answer.
+5. **Generate Response**: The final step where the Large Language Model, aided by the retrieved documents from the vector database, synthesizes a comprehensive and sound answer.
 """)
 
+st.subheader("More Details")
 st.write("**Why Cosine Similarity?**")
 image_cosine = Image.open('data/images/sentences-cosine-similarity.png')
 st.image(image_cosine, caption="Cosine Similarity")
 st.markdown("""
             - From a mathematic perspective, cosine similarity measures the cosine of the angle between two vectors projected in a multidimensional space. This measurement is beneficial, because if two documents are far apart by Euclidean distance because of size, they could still have a smaller angle between them and therefore higher cosine similarity.""")
-
-
-
-
-
-
-
-
-
 
 
 st.write("**Original Annotation for Identity Groups:**")
@@ -61,3 +61,11 @@ df = pd.DataFrame({"Model ID" : ["gpt-35-turbo-instruct (0914)", "text-embedding
 st.dataframe(df)
 
 
+##### SIDE BAR #####
+with st.sidebar:
+    st.subheader(":computer: More about the developer:")
+    st.write("Ngoh Wei Jie")
+    st.write("*Data Scientist, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")
+    st.subheader(":computer: Technical Supervisor:")
+    st.write("Aloysius Tan")
+    st.write("*Head, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")

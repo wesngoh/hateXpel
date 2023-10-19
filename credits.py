@@ -1,5 +1,6 @@
 import streamlit as st 
 
+st.set_page_config(page_title='paying dues', page_icon=':no_entry_sign:')
 st.title(':coin: credits')
 
 st.markdown(
@@ -20,3 +21,13 @@ st.markdown(
 - LangChain (https://python.langchain.com)
 - Weaviate (https://weaviate.io/)
 """)
+
+
+##### SIDE BAR #####
+with st.sidebar:
+    st.subheader(":computer: More about the developer:")
+    st.write("Ngoh Wei Jie")
+    st.write("*Data Scientist, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")
+    st.subheader(":computer: Technical Supervisor:")
+    st.write("Aloysius Tan")
+    st.write("*Head, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")
