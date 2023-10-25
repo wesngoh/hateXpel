@@ -71,7 +71,7 @@ def get_vector_embedding(text):
 def start_vectorstore():
     typing("instantiating vectore store ....")
     client = weaviate.Client(
-        url = "http://localhost:8080",  # Replace with your endpoint
+        url = "http://localhost:8081",  # Replace with your endpoint
         additional_headers = {
             "X-Azure-Api-Key": os.getenv("OPENAI_API_KEY")
         }
