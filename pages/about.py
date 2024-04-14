@@ -11,15 +11,12 @@ st.markdown("""
 - As the world witnesses a surge in social media, an unintended consequence has been the proliferation of hate comments online.
 - Despite so, this rising concern is often left as a second thought.
 - Many police reports have been lodged by victims who were harassed either online or in public for their identities.
-- Director RSD from MHQ have concerns over PID resources to classify these reports:
-1.  Laborious process
-2. Difficulty in understanding the nuances inherent in language context
+- Therefore, the pressing need arises for tools like a hate speech classifier, aimed at mitigating the spread and impact of these malignant comments to preserve the delicate balance of Singapore's multicultural society.")
 """)
-        #  Therefore, the pressing need arises for tools like a hate speech classifier, aimed at mitigating the spread and impact of these malignant comments to preserve the delicate balance of Singapore's multicultural society.")
 # st.write("Social media platforms grapple with the regulation of hate speech due to the vast volume of content, the nuances of linguistic context, and the fine line between freedom of expression and harmful intent.")
 
 st.subheader("Our Community")
-st.write("The Ministry of Home Affairs (MHA) takes a strong stance against threats to Singapore’s race and religious harmony. Legislation, such as the Maintenance of Religious Harmony Act, introduce powers that would allow pre-emptive action to be taken to maintain religious harmony in Singapore.")
+st.write("Singapore takes a strong stance against threats to Singapore’s race and religious harmony. Legislation, such as the Maintenance of Religious Harmony Act, introduce powers that would allow pre-emptive action to be taken to maintain religious harmony in Singapore.")
 st.write("**Maintenance of Religious Harmony Act:**")
 st.markdown(
     """
@@ -59,13 +56,3 @@ df = pd.DataFrame({"Model ID" : ["gpt-35-turbo-instruct (0914)", "text-embedding
                    "Max Request (tokens)" : ["4,097", "8,191"]
                    })
 st.dataframe(df)
-
-
-##### SIDE BAR #####
-with st.sidebar:
-    st.subheader(":computer: More about the developer:")
-    st.write("Ngoh Wei Jie")
-    st.write("*Data Scientist, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")
-    st.subheader(":computer: Technical Supervisor:")
-    st.write("Aloysius Tan")
-    st.write("*Head, Cognitive Analytics, Cognitive Computing, xData, Enterprise Group*")
