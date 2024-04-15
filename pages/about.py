@@ -26,7 +26,7 @@ st.markdown(
 )
 
 st.subheader("HateXpel")
-image_rag = Image.open('data/images/rag_y.webp')
+image_rag = Image.open('images/flowchart.webp')
 st.image(image_rag, caption="HateXpel's Flowchart")
 st.markdown("""
 1. **Query Embedding**: Transforms the user's query into a high-dimensional vector through an embedding model.
@@ -38,14 +38,14 @@ st.markdown("""
 
 st.subheader("More Details")
 st.write("**Why Cosine Similarity?**")
-image_cosine = Image.open('data/images/sentences-cosine-similarity.png')
+image_cosine = Image.open('images/sentences-cosine-similarity.png')
 st.image(image_cosine, caption="Cosine Similarity")
 st.markdown("""
             - From a mathematic perspective, cosine similarity measures the cosine of the angle between two vectors projected in a multidimensional space. This measurement is beneficial, because if two documents are far apart by Euclidean distance because of size, they could still have a smaller angle between them and therefore higher cosine similarity.""")
 
 
 st.write("**Original Annotation for Identity Groups:**")
-image_annotator = Image.open('data/images/annotator_identity_groups.png')
+image_annotator = Image.open('images/annotator_identity_groups.png')
 st.image(image_annotator, caption="Core and Sub Identities")
 
 
