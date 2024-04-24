@@ -9,21 +9,21 @@ services:
     - '8080'
     - --scheme
     - http
-    image: semitechnologies/weaviate:1.21.3
+    image: cr.weaviate.io/semitechnologies/weaviate:1.24.7
     ports:
-    # - 8080:8080
-    - 8081:8080
-    restart: on-failure:0
+    - 8080:8080
+    - 50051:50051
     volumes:
-      - ./backups:/tmp/backups
+    - weaviate_data:/var/lib/weaviate
+    restart: on-failure:0
     environment:
-      OPENAI_APIKEY: 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
+      OPENAI_APIKEY: $OPENAI_APIKEY
       QUERY_DEFAULTS_LIMIT: 25
       AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
       PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
       DEFAULT_VECTORIZER_MODULE: 'text2vec-openai'
-      ENABLE_MODULES: 'text2vec-openai,generative-openai, backup-filesystem'
+      ENABLE_MODULES: 'text2vec-openai'
       CLUSTER_HOSTNAME: 'node1'
-      BACKUP_FILESYSTEM_PATH: '/tmp/backups'
-      AZURE_APIKEY: f67625da3f91406ca2f6a8ee760f060e
+volumes:
+  weaviate_data:
 ...
