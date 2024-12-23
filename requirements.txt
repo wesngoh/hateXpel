@@ -1,0 +1,6 @@
+instructor @ git+https://github.com/jxnl/instructor@main#egg=instructor
+st_pages @ git+https://github.com/blackary/st_pages@main#egg=st_pages
+nomic==1.0.0
+streamlit==1.24.1
+langchain==0.0.208
+weaviate-client==3.15.0
