@@ -4,7 +4,7 @@ This repository contains a Streamlit app demonstrating the use of Retrieval Augm
 
 The classifier provides an explanation for its reasoning and identifies the potential core and sub identity groups attacked in the speech.
 
-**Trigger Warning:** Demonstration contains offensive language, profanities and other potentially distressing content.
+_**Trigger Warning:** This app including the preview contains offensive language, profanities and other potentially distressing content._
 
 ## Preview
 https://github.com/user-attachments/assets/21b03257-a755-4ab4-87e6-5d8e45a5160a
