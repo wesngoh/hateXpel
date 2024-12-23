@@ -1,4 +1,4 @@
-# hateXpel: Hate Speech Classifier
+# HateXpel: Hate Speech Classifier
 
 This repository contains a Streamlit app demonstrating the use of Retrieval Augmented Generation (RAG) to classify hate speech.
 
