@@ -7,7 +7,9 @@ The classifier provides an explanation for its reasoning and identifies the pote
 **Trigger Warning:** Demonstration contains offensive language, profanities and other potentially distressing content.
 
 ## Preview
-[![Watch the video](https://raw.githubusercontent.com/wesngoh/hateXpel/main/hatexpel_demo_screenshot.png)]
+[![Watch the video]
+(https://raw.githubusercontent.com/wesngoh/hateXpel/main/hatexpel_demo_screenshot.png)]
+(https://raw.githubusercontent.com/wesngoh/hateXpel/main/hatexpel_demo_trim.mov)
 
 ## Installation
 To install and run the demo app locally, follow these steps:
